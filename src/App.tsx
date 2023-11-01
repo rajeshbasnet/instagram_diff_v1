@@ -35,11 +35,7 @@ const App: React.FC = () => {
     },
   ]);
 
-  return (
-    <main className="flex h-screen">
-      <RouterProvider router={router} />
-    </main>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
