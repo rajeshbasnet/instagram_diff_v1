@@ -16,9 +16,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SignupValidation } from "@/lib/validation";
+import Loader from "@/shared/Loader";
+import { Link } from "react-router-dom";
 
 const SignupForm = () => {
-  const isLoading = true;
+  const isLoading = false;
 
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
@@ -30,8 +32,8 @@ const SignupForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof SignupValidation>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof SignupValidation>) {
+    // const newUser = await createUserAccount(values);
   }
 
   return (
@@ -42,7 +44,7 @@ const SignupForm = () => {
           Create a new account
         </h2>
         <p className="text-light-3 small-medium md:base-regular">
-          To use Snapgram enter your account details
+          To use Snapgram, enter your details
         </p>
 
         <form
@@ -105,13 +107,23 @@ const SignupForm = () => {
             )}
           />
 
-          <Button type="submit" className="font-inter">
+          <Button type="submit" className="shad-button_primary">
             {isLoading ? (
-              <div className="flex-center gap-2">Loading...</div>
+              <div className="flex-center gap-2">
+                <Loader />
+                Loading...
+              </div>
             ) : (
               "Sign up"
             )}
           </Button>
+
+          <p className="text-small-regular text-light-2 text-center mt-2">
+            Already have an account ?
+            <Link to={"/auth/sign-in"} className="text-primary-500">
+              Login
+            </Link>
+          </p>
         </form>
       </div>
     </Form>
