@@ -8,12 +8,7 @@ export const SignupValidation = z.object({
     message: "Username must be at least 2 characters",
   }),
   email: z.string().email(),
-  password: z
-    .string()
-    .regex(new RegExp("^[a-z][A-Z][0-9]+$"), {
-      message: "Password should follow patterns",
-    })
-    .min(8, {
-      message: "Password must be atleast 8 characters",
-    }),
+  password: z.string().min(8, {
+    message: "Password must be atleast 8 characters",
+  }),
 });
